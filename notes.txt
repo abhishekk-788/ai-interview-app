@@ -1,0 +1,6 @@
+Tools used
+- clerk
+- shadcn.ui
+- Hyper UI
+- Drizzle ORM
+- Postgres Neon DB
