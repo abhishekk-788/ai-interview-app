@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { Lightbulb, WebcamIcon } from "lucide-react";
 import Webcam from "react-webcam";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 function Interview({ params }) {
   const [interviewData, setInterviewData] = useState(null);
@@ -23,6 +24,7 @@ function Interview({ params }) {
         .where(eq(MockInterview.mockId, params.interviewId));
 
       setInterviewData(result[0]);
+      console.log("interviewData: ", result[0]);
     } catch (error) {
       console.error("Error fetching interview data:", error);
     }
@@ -76,7 +78,11 @@ function Interview({ params }) {
           ) : (
             <>
               <WebcamIcon className="h-72 w-full rounded-lg my-5 p-20 bg-secondary" />
-              <Button variant="ghost" className="w-full" onClick={() => setWebCamEnabled(true)}>
+              <Button
+                variant="ghost"
+                className="w-full"
+                onClick={() => setWebCamEnabled(true)}
+              >
                 Enable Web cam and Microphone
               </Button>
             </>
@@ -84,7 +90,22 @@ function Interview({ params }) {
         </div>
       </div>
       <div className="mt-5 flex justify-end items-end">
-        <Button> Start Interview </Button>
+        {interviewData && (
+          <div className="mt-5 flex justify-end items-end">
+            <Link
+              href={{
+                pathname: `/dashboard/interview/${params.interviewId}/start`,
+                query: {
+                  interviewId: params.interviewId,
+                  webCamEnabled: webCamEnabled,
+                  interviewData: JSON.stringify(interviewData), // Stringify to pass as query
+                },
+              }}
+            >
+              <Button>Start Interview</Button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
