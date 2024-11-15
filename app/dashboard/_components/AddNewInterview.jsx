@@ -89,7 +89,7 @@ function AddNewInterview() {
       hover:scale-105 hover:shadow-md cursor-pointer transition-all"
         onClick={() => setOpenDialog(true)}
       >
-        <h2 className="text-lg text-center">+ Add New</h2>
+        <h2 className="text-lg text-center font-sans">+ Add New</h2>
       </div>
       <Dialog open={openDialog}>
         <DialogContent className="max-w-xl">

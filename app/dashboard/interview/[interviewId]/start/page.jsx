@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import QuestionSection from "./_components/QuestionSection";
 import RecordAnswerSection from "./_components/RecordAnswerSection";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 function StartInterview() {
   const searchParams = useSearchParams();
@@ -70,7 +71,9 @@ function StartInterview() {
           </Button>
         )}
         {activeQuestion == interviewQuestions?.length - 1 && (
-          <Button>End Interview</Button>
+          <Link href={"/dashboard/interview/"+interviewMockId+"/feedback"}>
+            <Button>End Interview</Button>
+          </Link>
         )}
       </div>
     </div>
